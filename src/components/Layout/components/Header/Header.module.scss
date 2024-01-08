@@ -131,6 +131,9 @@
   padding: 4px 10px;
   margin: 0 2px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-user {
