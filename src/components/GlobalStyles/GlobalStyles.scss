@@ -4,6 +4,31 @@
 // font-family: 'Pacifico', cursive;
 // font-family: 'Roboto', sans-serif;
 
+// fonts
+@font-face {
+  font-family: TikTokDisplayFont;
+  src: url('/asset/fonts/TikTokDisplayFont-Bold.woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: TikTokFont;
+  src: url('/asset/fonts/TikTokFont-Bold.woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: TikTokFont;
+  src: url('/asset/fonts/TikTokFont-Regular.woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: TikTokFont;
+  src: url('/asset/fonts/TikTokFont-Semibold.woff2');
+  font-weight: 400;
+}
+
 :root {
   --primary: #fe2c55;
   --black: #000;
@@ -48,31 +73,6 @@ button {
 a {
   color: var(--text-color);
   text-decoration: none;
-}
-
-// fonts
-@font-face {
-  font-family: TikTokDisplayFont;
-  src: url('/asset/fonts/TikTokDisplayFont-Bold.woff2');
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: TikTokFont;
-  src: url('/asset/fonts/TikTokFont-Bold.woff2');
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: TikTokFont;
-  src: url('/asset/fonts/TikTokFont-Regular.woff2');
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: TikTokFont;
-  src: url('/asset/fonts/TikTokFont-Semibold.woff2');
-  font-weight: 400;
 }
 
 // customs tippy
