@@ -14,6 +14,7 @@
   // default layout
   --default-layout-header-height: 60px;
   --default-layout-width: 1150px;
+  --default-layout-horizontal-spacer: 24px;
 }
 
 * {
@@ -34,7 +35,9 @@ body {
   color: var(--text-color);
 }
 
-button, input, [tabindex] {
+button,
+input,
+[tabindex] {
   border: none;
   outline: none;
 }
@@ -42,4 +45,21 @@ button, input, [tabindex] {
 a {
   color: var(--text-color);
   text-decoration: none;
+}
+
+// customs tippy
+body {
+  .tippy-box {
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    background-color: rgba(84, 84, 84, 0.92);
+  }
+  .tippy-arrow {
+    color: rgba(84, 84, 84, 0.92);
+  }
+  .tippy-content {
+    padding: 6px 10px;
+  }
 }
