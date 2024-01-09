@@ -11,7 +11,7 @@ const cx = className.bind(styles);
 
 const defaultFc = () => {};
 
-function Menu({ children, items = [], OnChange = defaultFc }) {
+function Menu({ children, items = [], hideOnClick = false, OnChange = defaultFc }) {
   const [history, setHistory] = useState([{ data: items }]);
   const current = history[history.length - 1];
 
@@ -37,9 +37,11 @@ function Menu({ children, items = [], OnChange = defaultFc }) {
 
   return (
     <Tippy
+      visible
       interactive
       offset={[16, 8]}
       delay={[0, 300]}
+      hideOnClick={hideOnClick}
       placement="bottom-end"
       render={(attrs) => (
         <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
@@ -52,7 +54,7 @@ function Menu({ children, items = [], OnChange = defaultFc }) {
                 }}
               />
             )}
-            {renderItems()}
+            <div className={cx('menu-body')}>{renderItems()}</div>
           </PopperWrapper>
         </div>
       )}
