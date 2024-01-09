@@ -1,5 +1,5 @@
 import className from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -12,39 +12,87 @@ import AccountsItem from '~/components/AccountItems';
 const cx = className.bind(styles);
 
 function Search() {
+  const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const [showResult, setShowResult] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const inputRef = useRef();
 
   useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1, 2, 3]);
-    }, 0);
-  }, []);
+    if (!searchValue.trim()) {
+      setSearchResult([]);
+      return;
+    }
+
+    setLoading(true);
+
+    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+      .then((res) => res.json())
+      .then((res) => {
+        setSearchResult(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [searchValue]);
+
+  const handleClear = () => {
+    setSearchValue('');
+    setSearchResult([]);
+    inputRef.current.focus();
+  };
+
+  const handleHideResult = () => {
+    setShowResult(false);
+  };
 
   return (
     <HeadlessTippy
       interactive
-      visible={searchResult.length > 0}
+      visible={showResult && searchResult.length > 0}
+      onClickOutside={() => handleHideResult()}
       render={(attrs) => (
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <h4 className={cx('search-title')}>Accounts</h4>
-            <AccountsItem />
-            <AccountsItem />
-            <AccountsItem />
+            {searchResult.map((result) => (
+              <AccountsItem key={result.id} data={result} />
+            ))}
           </PopperWrapper>
         </div>
       )}
     >
       <div className={cx('search')}>
-        <input type="text" placeholder="Search and videos" spellCheck={false} />
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Search and videos"
+          spellCheck={false}
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+          onFocus={() => setShowResult(true)}
+        />
 
-        <button className={cx('clear')}>
-          <FontAwesomeIcon icon={faCircleXmark} />
-        </button>
+        {!!searchValue && !loading && (
+          <button
+            className={cx('clear')}
+            onClick={() => {
+              handleClear();
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleXmark} />
+          </button>
+        )}
 
-        <div className={cx('loading')}>
-          <FontAwesomeIcon icon={faSpinner} />
-        </div>
+        {loading && (
+          <div className={cx('loading')}>
+            <FontAwesomeIcon icon={faSpinner} />
+          </div>
+        )}
 
         <button className={cx('search-btn')}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />

@@ -54,6 +54,20 @@
   cursor: pointer;
 }
 
+.loading {
+  font-size: 1.4rem;
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+    transform: translateY(-50%) rotate();
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
 .search-btn {
   width: var(--btn-search-width);
   height: 100%;
