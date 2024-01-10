@@ -93,16 +93,17 @@ function Header() {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
+        {/* Logo */}
         <Link to={routesConfig.home}>
           <div className={cx('logo')}>
             <img src={images.logo} alt="Tiktok" />
           </div>
         </Link>
 
-        <div>
-          <Search />
-        </div>
+        {/* header search */}
+        <Search />
 
+        {/* header action */}
         <div className={cx('actions')}>
           {currentUser ? (
             <Fragment>
